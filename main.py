@@ -181,7 +181,7 @@ print("buff items - ", inventory[2]["buff items"]["Name"], "and boosts", invento
 print("mana items - ", inventory[3]["Mana items"]["Name"], "and regens mana by", inventory[3]["Mana items"]["mana_giver"], "mana with", mana_regen_uses, "uses")
 print("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
 
-
+print("hello worl")
 print("hello world")
 
 
