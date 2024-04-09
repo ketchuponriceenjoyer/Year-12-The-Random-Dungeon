@@ -1,188 +1,246 @@
 import time
 import random
 
-coins = 0
-level = 1
-
-health_max = 100
-mana = 0
-
-
-mana_regen_uses = 0
-healing_uses =  0
-buff_uses = 0
-
-weapon1 = 0
-weapon2 = 0
-
-inventory = [{"coins": coins}, {"Healing items":"empty"}, {"buff items":"empty"}, {"Mana items":"empty"}]
-
 weapon = [
 
-  {"Name":"sword", "Attack":[  "heavy attack",random.randint(5,10),  "light attack",random.randint(1,4)  ]}, # 0
-  {"Name":"shield", "Defense":[  "block",random.randint(3,10),  "parry",random.randint(1,100)  ] },# 1
-  {"Name":"staff", "Magic":[  "fireball",random.randint(5,10),  "lightning Strike",random.randint(1,4)  ] }# 2
+  {"name":"sword", "attack":[  "heavy attack",random.randint(5,10),  "light attack",random.randint(10,15)  ]}, # 0
+  {"name":"whip", "attack":[  "strike",random.randint(3,10),  "rip",random.randint(1,6)  ] },# 1
+  {"name":"staff", "attack":[  "fireball",random.randint(5,10),  "lightning Strike",random.randint(1,4)  ] },# 2
+  {"name":"bow", "attack":[  "light arrow",random.randint(5,10),  "piercing arrow",random.randint(1,4)  ] }# 2
 ]
 
 Healing_items = [
-  {"Name":"empty", "Health_giver":"nothing"},
-  {"Name":"Herbs", "Health_giver":random.randint(5,10)},
-  {"Name":"health potion", "Health_giver":random.randint(18,25)},
-  {"Name":"Big healing potion", "Health_giver":random.randint(28,36)},
-  {"Name":"large healing potion", "Health_giver":50},
-  {"Name":"Pie", "Health_giver":100},
+  {"name":None, "health_giver":None},
+  {"name":"herbs", "health_giver":random.randint(5,10)},
+  {"name":"health_potion", "health_giver":random.randint(18,25)},
+  {"name":"big_healing_potion", "health_giver":random.randint(28,36)},
+  {"name":"large_healing_potion", "health_giver":50},
+  {"name":"pie", "health_giver":100},
 ]
-if health_max >= 100:
-  health = 100
+
   
 Mana_items = [
-  {"Name":"empty", "mana_giver":"nothing"},
-  {"Name":"blueberry", "mana_giver":random.randint(5,10)},
-  {"Name":"mana potion", "mana_giver":random.randint(18,25)},
-  {"Name":"Big mana potion", "mana_giver":random.randint(28,36)},
-  {"Name":"large mana potion", "mana_giver":50},
-  {"Name":"Blueberry Pie", "mana_giver":100},
+  {"name":None, "mana_giver":None},
+  {"name":"blueberry", "mana_giver":random.randint(5,10)},
+  {"name":"mana_potion", "mana_giver":random.randint(18,25)},
+  {"name":"big_mana_potion", "mana_giver":random.randint(28,36)},
+  {"name":"large_mana_potion", "mana_giver":50},
+  {"name":"blueberry_Pie", "mana_giver":100},
 ]
-if mana >= 100:
-  mana = 100
 
 buff_items = [
-  {"Name":"empty", "Attackboost":"nothing"},
-  {"Name":"Magic Meat Rib", "Attackboost":random.randint(5,10)},
-  {"Name":"strength potion", "Attackboost":random.randint(18,25)},
-  {"Name":"Big strength potion", "Attackboost":random.randint(28,36)},
-  {"Name":"large strength potion", "Attackboost":50},
-  {"Name":"Chug Chug", "Attackboost":100},
+  {"name":None, "attack_boost":"nothing"},
+  {"name":"Magic_Meat_Rib", "attack_boost":random.randint(5,10)},
+  {"name":"strength_potion", "attack_boost":random.randint(18,25)},
+  {"name":"Big_strength_potion", "attack_boost":random.randint(28,36)},
+  {"name":"large_strength_potion", "attack_boost":50},
+  {"name":"Chug_Chug", "attack_boost":100},
 ]
 
-inventory = [
-  {"coins": coins}, 
-  {"Healing items":Healing_items[0]}, 
-  {"buff items":buff_items[0]}, 
-  {"Mana items":Mana_items[0]}]
 
+Enemy_Mob = [
+  {"name":"nobody", "attack":"nothing"},
+  {"name":"goblin", "health":random.randint(5, 10), "attack":["jab",random.randint(5,10), "roundhouse",random.randint(10,20)]},
+  {"name":"orc", "health":random.randint(10, 20), "attack":["boulder throw",random.randint(8,15), "shoulder strike",random.randint(24,30)]},
+  {"name":"giant", "health":random.randint(20, 30), "attack":["smash",random.randint(15,20), "stomp",random.randint(30,40)]},
+  
+  ]
+Healing_slots = [None, None, None]
+Healing_uses = [0,0,0]
 
+Buff_items_slots = [None, None, None]
+Buff_items_uses = [0,0,0]
 
+Mana_items_slots = [None, None, None]
+Mana_uses = [0,0,0]
+
+coins = 0
+
+Player_status_inventory = [
+  {"health": 100, "mana": 50},#0
+  {"coins": coins},#1
+  {"weapon_1": None, "weapon_2": None}, #2
+  {"healing_items":Healing_slots, "healing_uses":Healing_uses},#3
+  {"buff_items":Buff_items_slots, "buff_uses":Buff_items_uses},#4
+  {"mana_items":Mana_items_slots, "mana_uses":Mana_uses},#5
+]
+
+global healing_uses 
+  
 print("Welcome to the The Random Dungeon Game")
-time.sleep(3.5)
+  #time.sleep(3.5)
 print("In this game you wake up lost in a mysterious forest and is looking for a way out")
-time.sleep(3.5)
+  #time.sleep(3.5)
 print("you have a nothing in your inventory but see skeletal corpses on the ground")
-time.sleep(3.5)
+  #time.sleep(3.5)
 print("But on those corpses they appear to have a")
-time.sleep(1.4)
+  #time.sleep(1.4)
 print(weapon[0])
-time.sleep(1.4)
+  #time.sleep(1.4)
 print(weapon[1])
-time.sleep(1.4)
+  #time.sleep(1.4)
 print(weapon[2])
 print("you can only pick 2 weapons")
-time.sleep(3.5)
+  #time.sleep(3.5)
 print("weapon choices", " 1 for sword", " 2 for shield", " 3 for staff")
-time.sleep(2.5)
-
-
+  #time.sleep(2.5)
+  
+  
 while True:
   try:
     Chosen_weapon_1 = int(input("Choose your first weapon -- "))
+      #chosen sword for weapon1
     if Chosen_weapon_1 == 1:
-      weapon1 = weapon[0]
-
-      coins = coins + random.randint(5, 10)
-      inventory[1]["Healing items"] = Healing_items[1]
-      healing_uses = healing_uses + random.randint(5, 10)
-      inventory[2]["buff items"] = buff_items[1]
-      buff_uses = buff_uses + random.randint(3, 5)
+      Player_status_inventory[2]["weapon_2"] = weapon[0]
       
+      Healing_slots[0] = Healing_items[1]["name"]
+      Healing_uses[0] = random.randint(1,5)
+      
+      coins + random.randint(1,10)
+      
+      Buff_items_slots[0] = buff_items[1]["name"]
+      Buff_items_uses[0] = random.randint(1,5)
       break
+        
     elif Chosen_weapon_1 == 2:
-      weapon1 = weapon[1]
-
-      coins = coins + random.randint(5, 10)
-      inventory[1]["Healing items"] = Healing_items[1]
-      healing_uses = healing_uses + random.randint(5, 11)
+        #chosen whip for weapon1
+      Player_status_inventory[2]["weapon_2"] = weapon[1]
       
+      Healing_slots[0] = Healing_items[1]["name"]
+      Healing_uses[0] = random.randint(1,5)
+      coins + random.randint(1,10)
       break
+        
     elif Chosen_weapon_1 == 3:
-      weapon1 = weapon[2]
-
-      coins = coins + random.randint(5, 10)
-      inventory[1]["Mana items"] = Mana_items[1]
-      mana_regen_uses = mana_regen_uses + random.randint(3, 11)
-      inventory[3]["Mana items"] = Mana_items[1]
+      #chosen staff for weapon1
+      coins + random.randint(1,10)
       
+      Player_status_inventory[2]["weapon_2"] = weapon[2]
+      
+      Healing_slots[0] = Healing_items[1]["name"]
+      Healing_uses[0] = random.randint(1,5)
+      
+      Mana_items_slots[0] = Mana_items[1]["name"]
+      Mana_uses[0] = random.randint(1,5)
       break
   except ValueError:
-    print("Not the number of the choices given")
+    print("not in choices")
+  
     
-    
-time.sleep(1.5)
-print("you chose", weapon1["Name"])
-
-time.sleep(1.5)
-print("weapon choices", " 1 for sword", " 2 for shield", " 3 for staff")
-
-
 while True:
   try:
-    Chosen_weapon_2 = int(input("Choose your second weapon -- "))
-    if Chosen_weapon_2 == Chosen_weapon_1:
-      print("you have already chosen this weapon, choose another weapon")
-      continue
-    elif Chosen_weapon_2 == 1:
-      weapon2 = weapon[0]
-
-      coins = coins + random.randint(5, 10)
-      inventory[1]["Healing items"] = Healing_items[1]
-      healing_uses = healing_uses + random.randint(5, 10)
-      inventory[2]["buff items"] = buff_items[1]
-      buff_uses = buff_uses + random.randint(3, 5)
+    Chosen_weapon_2 = int(input("Choose your Second weapon -- "))
+    #chosen sword for weapon1
+    if Chosen_weapon_2 == 1:
+      Player_status_inventory[2]["weapon_1"] = weapon[0]
       
+      Healing_slots[1] = Healing_items[1]["name"]
+      Healing_uses[1] = random.randint(1,5)
+      
+      coins + random.randint(1,10)
+      
+      Buff_items_slots[1] = buff_items[1]["name"]
+      Buff_items_uses[1] = random.randint(1,5)
       break
     elif Chosen_weapon_2 == 2:
-      weapon2 = weapon[1]
-
-      coins = coins + random.randint(5, 10)
-      inventory[1]["Healing items"] = Healing_items[1]
-      healing_uses = healing_uses + random.randint(5, 11)
+      #chosen whip for weapon1
+      Player_status_inventory[2]["weapon_1"] = weapon[1]
+        
+      Healing_slots[1] = Healing_items[1]["name"]
+      Healing_uses[1] = random.randint(1,5)
       
+      coins + random.randint(1,10)
       break
     elif Chosen_weapon_2 == 3:
-      weapon2 = weapon[2]
-
-      coins = coins + random.randint(5, 10)
-      inventory[1]["Mana items"] = Mana_items[1]
-      mana_regen_uses = mana_regen_uses + random.randint(3, 11)
-      inventory[3]["Mana items"] = Mana_items[1]
+      #chosen staff for weapon1
+      coins + random.randint(1,10)
+      
+      Player_status_inventory[2]["weapon_1"] = weapon[2]
+      
+      Healing_slots[1] = Healing_items[1]["name"]
+      Healing_uses[1] = random.randint(1,5)
+      
+      Mana_items_slots[1] = Mana_items[1]["name"]
+      Mana_uses[1] = random.randint(1,5)
       
       break
-     
+    elif Chosen_weapon_2 == Chosen_weapon_1:
+      print("You can't have the same weapon twice")
+      continue
+        
   except ValueError:
-    print("Not the number of the choices given")
+    print("not in choices")
     
+def Player_status():
+  print("-----------------------------------------------------------------------------------")
+  print("Weapon 1", Player_status_inventory[2]["weapon_1"])
+  print("Weapon 2 ", Player_status_inventory[2]["weapon_2"])
+  print("-----------------------------------------------------------------------------------")
+  print("Healing Items :", Player_status_inventory[3]["healing_items"])
+  print("Healing Uses :", Player_status_inventory[3]["healing_uses"])
+
+  print("Buff_items :", Player_status_inventory[4]["buff_items"])
+  print("Buff Uses :", Player_status_inventory[4]["buff_uses"])
+
+  print("Mana Items :", Player_status_inventory[5]["mana_items"])
+  print("Mana Uses :", Player_status_inventory[5]["mana_uses"])
+  print("-----------------------------------------------------------------------------------")
+Player_status()
+
+
+
+
+def Battle():
+  print("battle")
+  enemy_selection = random.randint(1,3)
+  Enemy_selected = Enemy_Mob[enemy_selection]
+  Enemy_health = Enemy_selected["health"]
+  print("you have encountered a", Enemy_selected["name"])
+  print("it has", Enemy_health,"health")
+  
+  
+  print("what will you do?")
+  enemy_attack_choice = input("A for begin battle or B to run away").upper()
+  if enemy_attack_choice == "A":
+    print("you begin to attack")
+  elif enemy_attack_choice == "B":
+    situation_randomiser()
     
+  while Player_status_inventory[0]["health"] > 0 and Enemy_selected["health"] > 0:
+    print("what weapon will you use?", Player_status_inventory[2]["weapon_1"]["name"],"(A)", Player_status_inventory[2]["weapon_2"]["name"],"(B)")
     
-time.sleep(1.5)
-print("you chose", weapon2["Name"])
-time.sleep(3.5)
-print("depending one what you chose, you also grab some items that will suit your build")
-time.sleep(3.5)
+    weapon_attack_choice = input("---").upper()
+    random_attack_generator = random.randrange(0,3,2)
+    
+    if weapon_attack_choice == "A":
+      print("you use your", Player_status_inventory[2]["weapon_1"])
+      weapon_damage = Player_status_inventory[2]["weapon_1"]["attack"][random_attack_generator + 1]
+    elif weapon_attack_choice == "B":
+      print("you use your", Player_status_inventory[2]["weapon_2"])
+      weapon_damage = Player_status_inventory[2]["weapon_2"]["attack"][random_attack_generator + 1]
+      
+    print(weapon_damage)
+    Enemy_health -= weapon_damage
+    print(Enemy_health)
+    if Enemy_health <= 0:
+      break
+  situation_randomiser()
+      
+    
+
+def shop():
+  print("shop")
 
 
-print("--------------------------------------------------------")
-print("First weapon - ", weapon1["Name"])
-print("Second weapon - ", weapon2["Name"])
-print("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
-print("                                                                  INVENTORY                                                    ")
-print("coins - ", inventory[0]["coins"])
-print()
-print("health items - ", inventory[1]["Healing items"]["Name"]," and regens", inventory[1]["Healing items"]["Health_giver"], " health with", healing_uses, "uses")
-print("buff items - ", inventory[2]["buff items"]["Name"], "and boosts", inventory[2]["buff items"]["Attackboost"], "attack with", buff_uses, "uses")
-print("mana items - ", inventory[3]["Mana items"]["Name"], "and regens mana by", inventory[3]["Mana items"]["mana_giver"], "mana with", mana_regen_uses, "uses")
-print("-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+def item():
+  print("item")
 
-print("hello worl")
-print("hello world")
-
-
-
+def situation_randomiser():
+  Situation_randomiser = random.randint(0,50)
+  if Situation_randomiser <= 30:
+    Battle()
+  elif Situation_randomiser >= 30:
+    shop()
+  elif Situation_randomiser >= 45:
+    item()
+situation_randomiser()
