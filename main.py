@@ -40,86 +40,6 @@ weapon = [
     }  # 2
 ]
 
-healing_items = [
-    {
-        "name": None,
-        "health_giver": None
-    },
-    {
-        "name": "herbs",
-        "health_giver": random.randint(5, 10)
-    },
-    {
-        "name": "health_potion",
-        "health_giver": random.randint(18, 25)
-    },
-    {
-        "name": "big_healing_potion",
-        "health_giver": random.randint(28, 36)
-    },
-    {
-        "name": "large_healing_potion",
-        "health_giver": 50
-    },
-    {
-        "name": "pie",
-        "health_giver": 100
-    },
-]
-
-mana_items = [
-    {
-        "name": None,
-        "mana_giver": None
-    },
-    {
-        "name": "blueberry",
-        "mana_giver": random.randint(5, 10)
-    },
-    {
-        "name": "mana_potion",
-        "mana_giver": random.randint(18, 25)
-    },
-    {
-        "name": "big_mana_potion",
-        "mana_giver": random.randint(28, 36)
-    },
-    {
-        "name": "large_mana_potion",
-        "mana_giver": 50
-    },
-    {
-        "name": "blueberry_Pie",
-        "mana_giver": 100
-    },
-]
-
-buff_items = [
-    {
-        "name": None,
-        "attack_boost": None
-    },
-    {
-        "name": "Magic_Meat_Rib",
-        "attack_boost": random.randint(5, 10)
-    },
-    {
-        "name": "strength_potion",
-        "attack_boost": random.randint(18, 25)
-    },
-    {
-        "name": "Big_strength_potion",
-        "attack_boost": random.randint(28, 36)
-    },
-    {
-        "name": "large_strength_potion",
-        "attack_boost": 50
-    },
-    {
-        "name": "Chug_Chug",
-        "attack_boost": 100
-    },
-]
 
 enemy_mob = [
     {
@@ -158,33 +78,12 @@ enemy_mob = [
     },
 ]
 
-crystals = []
+gem_shards = [{"diamond_shard": False},{"gold_shard": False},{"coal_shard": False},{"emerald_shard": False},{"lapis_shard": False},]
 
 player_status_inventory = [
-    {
-        "health": 100,
-        "mana": 50
-    },  #0
-    {
-        "coins": 0
-    },  #1
-    {
-        "weapon_1": None,
-        "weapon_2": None
-    },  #2
-    {
-        "healing_items":
-        [healing_items[0], healing_items[0], healing_items[0]],
-        "healing_uses": [0, 0, 0]
-    },  #3
-    {
-        "buff_items": [buff_items[0], buff_items[0], buff_items[0]],
-        "buff_uses": [0, 0, 0]
-    },  #4
-    {
-        "mana_items": [mana_items[0], mana_items[0], mana_items[0]],
-        "mana_uses": [0, 0, 0]
-    },  #5
+    {"health": 100},  #0
+    {"coins": 0},  #1
+    {"weapon_1": None,"weapon_2": None},  #2
 ]
 
 print("Welcome to the The Random Dungeon Game")
@@ -218,10 +117,6 @@ while True:
           "coins"] = player_status_inventory[1]["coins"] + random.randint(
               5, 10)
       player_status_inventory[2]["weapon_1"] = weapon[0]
-      player_status_inventory[3]["healing_items"][0] = healing_items[1]
-      player_status_inventory[3]["healing_uses"][0] = random.randint(3, 6)
-      player_status_inventory[4]["buff_items"][0] = buff_items[1]
-      player_status_inventory[4]["buff_uses"][0] = random.randint(1, 4)
       break
 
     elif Chosen_weapon_1 == 2:
@@ -229,8 +124,6 @@ while True:
           "coins"] = player_status_inventory[1]["coins"] + random.randint(
               5, 10)
       player_status_inventory[2]["weapon_1"] = weapon[1]
-      player_status_inventory[3]["healing_items"][0] = healing_items[1]
-      player_status_inventory[3]["healing_uses"][0] = random.randint(4, 8)
       break
       #chosen whip for weapon1
 
@@ -239,21 +132,17 @@ while True:
           "coins"] = player_status_inventory[1]["coins"] + random.randint(
               5, 10)
       player_status_inventory[2]["weapon_1"] = weapon[2]
-      player_status_inventory[3]["healing_items"][0] = healing_items[1]
-      player_status_inventory[3]["healing_uses"][0] = random.randint(4, 8)
-      player_status_inventory[5]["mana_items"][0] = mana_items[1]
-      player_status_inventory[5]["mana_uses"][0] = random.randint(4, 8)
       break
 
       #chosen staff for weapon1
 
   except ValueError:
     print("not in choices")
+    continue
 
 while True:
   try:
     Chosen_weapon_2 = int(input("Choose your second weapon -- "))
-
     if Chosen_weapon_1 == Chosen_weapon_2:
       print("cannot pick the same weapon")
       continue
@@ -263,10 +152,7 @@ while True:
           "coins"] = player_status_inventory[1]["coins"] + random.randint(
               5, 10)
       player_status_inventory[2]["weapon_2"] = weapon[0]
-      player_status_inventory[3]["healing_items"][1] = healing_items[1]
-      player_status_inventory[3]["healing_uses"][1] = random.randint(3, 6)
-      player_status_inventory[4]["buff_items"][1] = buff_items[1]
-      player_status_inventory[4]["buff_uses"][1] = random.randint(1, 4)
+      
       break
 
     elif Chosen_weapon_2 == 2:
@@ -274,8 +160,7 @@ while True:
           "coins"] = player_status_inventory[1]["coins"] + random.randint(
               5, 10)
       player_status_inventory[2]["weapon_2"] = weapon[1]
-      player_status_inventory[3]["healing_items"][1] = healing_items[1]
-      player_status_inventory[3]["healing_uses"][1] = random.randint(4, 8)
+      
       break
       #chosen whip for weapon1
 
@@ -284,17 +169,18 @@ while True:
           "coins"] = player_status_inventory[1]["coins"] + random.randint(
               5, 10)
       player_status_inventory[2]["weapon_2"] = weapon[2]
-      player_status_inventory[3]["healing_items"][1] = healing_items[1]
-      player_status_inventory[3]["healing_uses"][1] = random.randint(4, 8)
-      player_status_inventory[5]["mana_items"][1] = mana_items[1]
-      player_status_inventory[5]["mana_uses"][1] = random.randint(4, 8)
+      
+      
+      
       break
 
   except ValueError:
     print("not in choices")
+    continue
 
 
 def Player_status():
+  allow_status_change = False
   print(
       "-----------------------------------------------------------------------------------"
   )
@@ -322,35 +208,10 @@ def Player_status():
   print(
       "-----------------------------------------------------------------------------------"
   )
-  print("Healing Items :", "Slot 1 (",
-        player_status_inventory[3]["healing_items"][0]["name"], ") |",
-        "Slot 2 (", player_status_inventory[3]["healing_items"][1]["name"],
-        ") |", "Slot 3 (",
-        player_status_inventory[3]["healing_items"][2]["name"], ")")
-  print("Healing Uses :", "Slots 1 (",
-        player_status_inventory[3]["healing_uses"][0], ") |", "Slots 2 (",
-        player_status_inventory[3]["healing_uses"][1], ") |", "Slots 3 (",
-        player_status_inventory[3]["healing_uses"][2], ")")
-  print()
-  print("Buff_items :", "Slot 1 (",
-        player_status_inventory[4]["buff_items"][0]["name"], ") |", "Slot 2 (",
-        player_status_inventory[4]["buff_items"][1]["name"], ") |", "Slot 3 (",
-        player_status_inventory[4]["buff_items"][2]["name"])
-  print("Buff Uses :", "Slots 1 (", player_status_inventory[4]["buff_uses"][0],
-        ") |", "Slots 2 (", player_status_inventory[4]["buff_uses"][1], ") |",
-        "Slots 3 (", player_status_inventory[4]["buff_uses"][2], ")")
-  print()
-  print("Mana Items :", "Slot 1 (",
-        player_status_inventory[5]["mana_items"][0]["name"], ") |", "Slot 2 (",
-        player_status_inventory[5]["mana_items"][1]["name"], ") |", "Slot 3 (",
-        player_status_inventory[5]["mana_items"][2]["name"], ")")
-  print("Mana Uses :", "Slots 1 (", player_status_inventory[5]["mana_uses"][0],
-        ") |", "Slots 2 (", player_status_inventory[5]["mana_uses"][1], ") |",
-        "Slots 3 (", player_status_inventory[5]["mana_uses"][2], ")")
-  print(
-      "-----------------------------------------------------------------------------------"
-  )
 
+  if allow_status_change == True:
+    print("")
+  
 
 Player_status()
 
@@ -359,7 +220,7 @@ def battle():
   enemy_selected = enemy_mob[random.randint(1, 3)]
   enemy_use_weapon_or_not = random.randint(1,2)
   enemy_weapon_selection = random.randint(0, 3)
-  print("Players turn")
+  
   print("-----------------------------------------------------------------------------------")
   print("you have encountered a", enemy_selected["name"])
   print(enemy_selected["health"], " : Health")
@@ -372,6 +233,7 @@ def battle():
   elif enemy_use_weapon_or_not == 2:
     print(enemy_selected["attack"]["first_name"], " : deals", enemy_selected["attack"]["first_skill"],"damage")
     print(enemy_selected["attack"]["second_name"], " : deals", enemy_selected["attack"]["second_skill"],"damage")
+  
   print("-----------------------------------------------------------------------------------")
   while True:
     try:
@@ -387,9 +249,11 @@ def battle():
     
 
   while True:
+    print("Players turn")
+    print("-----------------------------------------------------------------------------------")
     player_damage_dealt = 0
-    print("Choose which weapon you would like to use")
-    print(("(A)", player_status_inventory[2]["weapon_1"]["name"], "(B)", player_status_inventory[2]["weapon_2"]["name"]))
+    print("Choose which weapon you would like to use ot you use an")
+    print("(A)", player_status_inventory[2]["weapon_1"]["name"], "(B)")
     player_weapon_selection_choice = input(":  ").upper()
     if player_weapon_selection_choice == "A":
       weapon_skill_selection = random.randint(1,2)
@@ -412,6 +276,9 @@ def battle():
       print("not in choices")
       continue
       
+    print("-----------------------------------------------------------------------------------")
+    print("Result")
+    print("-----------------------------------------------------------------------------------")
     enemy_selected["health"] -= player_damage_dealt
     print("you dealt", player_damage_dealt, "Damage")
     if enemy_selected["health"] <= 0:
@@ -420,7 +287,10 @@ def battle():
       print(enemy_selected["health"], " : Enemy Health")
 
     if enemy_selected["health"] <= 0:
+      reward = random.randint(5, 25)
+      player_status_inventory[1]["coins"] += reward
       print("you have defeated the", enemy_selected["name"])
+      print("you have been awarded, ", player_status_inventory[1]["coins"])
       situation_randomiser()
       break
 
@@ -450,29 +320,60 @@ def battle():
       break
     else:
       print(player_status_inventory[0]["health"], " : Your Health")
-  
-def shop():
+    print("-----------------------------------------------------------------------------------")
+    
+def docter():
+  medical_cost = random.randint(45,150)
+  medical_treatment = random.randint(5,25)
+  print("-----------------------------------------------------------------------------------")
+  print("You find a small cavern")
+  print("you enter the cavern and notice its a man")
+  print("the man tells you he's a docter and ask if you need medical attention")
+  print("the cost is", medical_cost, "coins")
+  print("you have", player_status_inventory[1]["coins"],"coins")
+  print("you have", player_status_inventory[0]["health"],": health")
+  print("will you need treatment? A for yes B for no")
+  while True:
+    try:
+      shop_keeper_sells = input(":").upper()
+      print("")
+      if shop_keeper_sells == "A":
+        if player_status_inventory[0]["health"] == 100:
+          print("you are already max health")
+          continue
+        else:
+          if player_status_inventory[1]["coins"] >= medical_cost:
+            player_status_inventory[0]["health"] += medical_treatment
+            if player_status_inventory[0]["health"] > 100:
+              print("you have been healed up to max health")
+              player_status_inventory[0]["health"] = 100
+            else:
+              print("you have been healed to", player_status_inventory[0]["health"], "health")
+              print("Thanks for coming")
+              print("you leave the cavern and go on your way")
+              situation_randomiser()
+          else:
+            print("you do not have enough coins")
+            continue
+            
+      elif shop_keeper_sells == "B":
+        print("Get the hell out of my cavern!")
+        situation_randomiser()
+    except ValueError:
+      print("not in choices")
 
-  print("shop")
-  enemy_attack_choice = input("A for begin battle or B to run away").upper()
-  if enemy_attack_choice == "A":
-    print("you begin to attack")
-  elif enemy_attack_choice == "B":
-    situation_randomiser()
-
-
-def item():
+def crystal():
   print("item")
 
 
 def situation_randomiser():
+  allow_status_change = True
   Situation_randomiser = random.randint(0, 50)
-  if Situation_randomiser <= 30:
+  if Situation_randomiser <= 35:
     battle()
-  elif Situation_randomiser >= 30:
-    shop()
+  elif Situation_randomiser >= 35:
+    docter()
   elif Situation_randomiser >= 40:
-    item()
-
-
+    crystal()
 situation_randomiser()
+
